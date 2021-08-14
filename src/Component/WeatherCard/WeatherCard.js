@@ -92,47 +92,38 @@ const useStyles = makeStyles((theme) => ({
 export default function WeatherCard(props) {
    
     const classes = useStyles();
+    const [weather,setWeather] = useState([])
 
     useEffect(() =>{
         getWeatherDetails();
     },[]);
 
     const getWeatherDetails = () =>{
-        console.log("Hereeee",props.cityName);
-       
-        let cityDetails = getWeather(props.cityName);
-        console.log("Functionnnnnn",cityDetails);
-        // service.getCity(props.city).then((details)=>{
-        //     console.log("Details",details)
-        // })
+        service.getCity(props.cityDetails.coord.lat,props.cityDetails.coord.lon).then((details)=>{
+            setWeather(details.data)
+        })
     }
 
     const removeCard = () => {
         console.log("Removed Card")
     }
 
-    console.log("Card",props.city)
-
-    return (<div style={{display:"flex", justifyContent:"center", width:"100%",flexDirection:"row"}}>
-  
+    
+    return (<div style={{display:"flex", justifyContent:"center", width:"100%",flexDirection:"row"}}>            
           <Card className={classes.root} >
               <CardContent>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
-                  <strong> Mumbai,IN
-                  {/* {cDetail.name}, */}
-                    {/* {details.sys.country} */}
-                    {/* {details && details.sys ? details.sys.country : " "} */}
-                    </strong>
+                  <strong> {props.cityDetails.name},{props.cityDetails.sys.country}
+                   </strong>
                     <CloseIcon style={{marginLeft:"95%"}}  className={classes.close} onClick={removeCard}/>
                 </Typography>
                 
                 <Typography className={classes.temp} variant="h5" component="h2">
                     <Waves  className={classes.wave}/> 
-                    {/* {details.main.temp} C */}
-                    {/* {details && details.main ? details.main.temp : " "} */}
-                </Typography>
+                    {weather && weather.current ? weather.current.temp : ""} C
+                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
-                    {/* <strong>Feels like {details && details.main ? details.main.feels_like : " "}C.Haze.Gentle Breeze</strong> */}
+                    <strong>Feels like {weather && weather.current ? weather.current.feels_like : " "}C.Haze.Gentle Breeze</strong>
                 </Typography>
                 <Typography variant="body2" component="p">
                     
@@ -141,19 +132,15 @@ export default function WeatherCard(props) {
                     <NearMeIcon className={classes.icon}/>5.1m/s W  <CheckCircleOutlineIcon className={classes.icon2}/>108hPa
                 </div>
                 <div className={classes.humid}>
-                    {/* <div>Humidity: {details && details.main ? details.main.humidity : " "}% </div> */}
-                    <div style={{marginLeft:"30px"}}> UV:9</div>
-                    
+                    <div>Humidity: {weather && weather.current ? weather.current.humidity : " "}% </div>
+                    <div style={{marginLeft:"30px"}}> UV:9</div>        
                 </div>
                 <div className={classes.humid}>
-                    <div> Dew point : 24C </div>
-                    <div style={{marginLeft:"23px"}}> Visibility: 5.0km</div>
-                    
+                    <div> Dew point : {weather && weather.current ? weather.current.dew_point : ""}C </div>
+                    <div style={{marginLeft:"23px"}}> Visibility: {weather && weather.current ? weather.current.visibility : ""}km</div>
                 </div>
               </CardContent>
-            
             </Card>
-   
      </div>
     
     )

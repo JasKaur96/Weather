@@ -127,11 +127,9 @@ function Search(props) {
     const searchCity = () => {
         setOpen(!open)
         let val = city.city;       
-        console.log(val)
         // handleToggle();
         service.findCity(val).then((res) => {
-            let value = res.data.list
-            console.log("Response value",value)          
+            let value = res.data.list        
             setCityDetails({cityDetails : value})
             // handleClose();               
         }).catch((error) => {
@@ -140,24 +138,21 @@ function Search(props) {
     }
     let cityArr = [];
 
-    const setCityInUrl = (id,cityName) => {
+    const setCityInUrl = (city) => {
         setOpen(!open)
-        console.log("Name",id,props.urlCity)
+        cityArr.push(city.name)
+
+        if(city.name != props.urlCity){
+            props.history.push({
+                pathname: '/',
+                search: `?cities=${JSON.stringify(cityArr)}`
        
-        cityArr.push(id)
-
-        console.log("array in search", cityArr)
-
-        props.history.push({
-            pathname: '/',
-            search: `?cities=${id}`,
-        })
-        props.getCityFromUrl(id,cityName);
-        
-        console.log("Name",id,props.urlCity)
+            })
+        }      
+        props.getCityFromUrl(city);
+    
     }
-
-    console.log("Cities value =====",cityDetails.cityDetails)
+    
     let details = cityDetails.cityDetails;
   
     return (
@@ -169,7 +164,7 @@ function Search(props) {
                     {details ? <>
                         {details.map((city)=>{ 
                             return(
-                                <ListItem button className={classes.list} onClick={()=>setCityInUrl(city.id,city.name)}>                        
+                                <ListItem button className={classes.list} onClick={()=>setCityInUrl(city)}>                        
                                     <ListItemText className={classes.name}>
                                         {city.name},{city.sys.country} 
                                     </ListItemText>        
