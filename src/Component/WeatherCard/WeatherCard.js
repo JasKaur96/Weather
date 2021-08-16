@@ -114,8 +114,7 @@ export default function WeatherCard(props) {
                     <CloseIcon 
                     style={{marginLeft:"20%"}}  
                     className={classes.close} onClick={removeCard}/>
-                </Typography>
-                
+                </Typography>                
                 <Typography className={classes.temp} variant="h5" component="h2">
                     <Waves  className={classes.wave}/> 
                     {/* {weather && weather.current ? weather.current.temp : ""} C */}

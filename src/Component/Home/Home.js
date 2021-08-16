@@ -34,6 +34,9 @@ export default function Home() {
 
     }, []);
      
+    useEffect(() => {
+        getCityFromUrl();
+    }, []);
      
     const getCityFromUrl = (name) =>{       
 
@@ -53,7 +56,7 @@ export default function Home() {
     const getWeather = (cityArray=[]) => {
     
         console.log("City in get weather",cityArray)
-        setUrlCities(cityArray);
+        setUrlCities(cityArray) 
         let multipleCItyDetails = [];
         cityArray.map((city) => {        
             service.findCity(city).then((res) => {
@@ -61,15 +64,13 @@ export default function Home() {
                 let details = res.data.list[0]
                 console.log("city heree",cities)
                 multipleCItyDetails.push(details)
-                
-                console.log("multipleCItyDetails",multipleCItyDetails)
-                // setCities(multipleCItyDetails)
             
             }).catch((error) => {
                 console.log(error);
             })    
             setCities(multipleCItyDetails)
-        })
+        console.log("-----------------",cities)
+    })
    
     console.log("multipleCItyDetails",)
            
@@ -78,10 +79,11 @@ export default function Home() {
     return (
         <div style={{background:"#85C1E9",height:"720px"}}>           
             <Search urlCities={urlCities} getCityFromUrl={getCityFromUrl}/>
-                {cities != "" ?<>                   
-                    <WeatherCard urlCities={urlCities} cityDetails={cities} />
-                  </>
-                   : <></>
+                {cities.map( (city) => 
+                 
+                    <WeatherCard urlCities={urlCities} cityDetails={city} />
+              
+                    )
                 }           
         </div>
     )
