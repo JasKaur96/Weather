@@ -72,9 +72,11 @@ const useStyles = makeStyles((theme) => ({
         marginTop: 5,
       },
       close:{
-        display:"flex",
-        flexDirection:"row",
-        justifyContent:"flex-end",
+          position:"absolute",
+          marginRight: 10,
+        // display:"flex",
+        // flexDirection:"row",
+        // justifyContent:"flex-end",
       }
   }));
 
@@ -89,20 +91,9 @@ export default function WeatherCard(props) {
     },[]);
 
     const getWeatherDetails = () =>{
-        console.log("Weather card city", props.cityDetails,props.urlCities)
-      
-        props.urlCities.map((city) => {
-            console.log("One city in map", city)        
-            service.findCity(city).then((res) => {
-                console.log("Response outside  ------",res.data.list)
-                let details = res.data.list    
-                setCities(res.data.list)
-            }).catch((error) => {
-                console.log(error);
-            })    
-        })
-        console.log("Arrayyyyyyyy",cities)
-    
+        console.log("Weather card city", props.cityDetails)
+
+
         // service.getCity(props.cityDetails.coord.lat,props.cityDetails.coord.lon).then((details)=>{
         //     setWeather(details.data)
         // })
@@ -120,7 +111,9 @@ export default function WeatherCard(props) {
                   {props.cityDetails.name}
                   {/* ,{props.cityDetails.sys.country} */}
                    </strong>
-                    <CloseIcon style={{marginLeft:"95%"}}  className={classes.close} onClick={removeCard}/>
+                    <CloseIcon 
+                    style={{marginLeft:"20%"}}  
+                    className={classes.close} onClick={removeCard}/>
                 </Typography>
                 
                 <Typography className={classes.temp} variant="h5" component="h2">

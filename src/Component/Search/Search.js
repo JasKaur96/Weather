@@ -158,7 +158,7 @@ function Search(props) {
                 search: `?cities=${cityArr}`       
             })
         }      
-        props.getCityFromUrl(city,selectedCities);
+        props.getCityFromUrl(cityArr);
     
     }
     

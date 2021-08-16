@@ -29,74 +29,50 @@ export default function Home() {
             setUrlCities(citiesInUrl)           
         }      
         getCityFromUrl();
+         
+        // getWeather(urlCities);
 
-    }, [url]);
-     
-    useEffect(() => {
-        getCityFromUrl();
     }, []);
      
-    const getCityFromUrl = (name) =>{
-       
+     
+    const getCityFromUrl = (name) =>{       
 
-        if(name?.id){
-            setCityId(name.id)
-            console.log("citydetails", name,id)
-            setCities(name)
-            // getWeather(id)
-        }       
+        // if(name?.id){
+        //     setCityId(name.id)
+        //     console.log("citydetails", name,id)
+        //     setCities(name)
+        //     getWeather(id)
+        // }    
 
-        let stringifiedArray  = ""
-        if (url?.search) {
-            const query = url.search;
-            console.log("iff ===>>>>>",urlCities)
-           
-            getWeather(urlCities);
+        getWeather(name);
 
-            // if(name){
-            //     stringifiedArray = query.substring(10);
-            //     console.log("url ",stringifiedArray)
-            // }else
-            //     stringifiedArray = query.substring(8);
 
-            // console.log("url ",stringifiedArray)
-            // const originalArray = JSON.parse(stringifiedArray);
-            // console.log("url ",originalArray)
-          
-            // console.log("Original array is", originalArray);
-           
-            // setUrlCities(originalArray) 
+    }
 
-            // let cities =[]
-          
-            // originalArray.map((city)=>{       
-            //     cities.push(city)
-            //     console.log("url",cities,city)                             
-            //     getWeather(city,id);    
-      
-            // })    
-            // console.log("citydetails", cityName)      
-      
-          }       
-}
-let details = cities
-    const getWeather = (url) => {
+// let details = cities
+    const getWeather = (cityArray=[]) => {
     
-        console.log("City in get weather",urlCities)
+        console.log("City in get weather",cityArray)
+        setUrlCities(cityArray);
         let multipleCItyDetails = [];
-        urlCities.map((city) => {        
-        service.findCity(city).then((res) => {
+        cityArray.map((city) => {        
+            service.findCity(city).then((res) => {
+                
+                let details = res.data.list[0]
+                console.log("city heree",cities)
+                multipleCItyDetails.push(details)
+                
+                console.log("multipleCItyDetails",multipleCItyDetails)
+                // setCities(multipleCItyDetails)
             
-            details = res.data.list[0]
-            console.log("city heree",cities)
-            multipleCItyDetails.push(details)
-            setCities(details)
-            
-        }).catch((error) => {
-            console.log(error);
-        })    
-        console.log("-----------------",cities)
-    })
+            }).catch((error) => {
+                console.log(error);
+            })    
+            setCities(multipleCItyDetails)
+        })
+   
+    console.log("multipleCItyDetails",)
+           
 }
 
     return (
