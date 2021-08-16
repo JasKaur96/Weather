@@ -1,5 +1,5 @@
 import { Button, ListItem, ListItemIcon, ListItemText, Paper, Popper} from '@material-ui/core'
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import CloudIcon from '@material-ui/icons/Cloud';
 import InputBase from '@material-ui/core/InputBase';
@@ -58,8 +58,8 @@ const BootstrapInput = withStyles((theme) => ({
     popper: {
      position: "relative",
      marginTop : 120,
-     marginLeft: 212, 
-     width:"51.4%",
+     marginLeft: 222, 
+     width:"50.6%",
     },
     paper :{
         padding: 4,
@@ -115,8 +115,13 @@ function Search(props) {
     const classes = useStyles();
     const [open,setOpen]= useState(false);
     const [city,setCity] = useState("");
-    const [cityDetails,setCityDetails]= useState([]);
+    const [cityDetails,setCityDetails]= useState([]);    
+    const [selectedCities,setSelectedCities]= useState(props.urlCities);
     
+    useEffect(() => {
+        console.log("Cities form url",props.urlCities,selectedCities)
+    }, [selectedCities]);
+
     const setSearchCity = (city) => {       
         if(city === ""){
             setOpen(false);
@@ -136,20 +141,24 @@ function Search(props) {
             console.log(error);
         })               
     }
-    let cityArr = [];
-
+  
     const setCityInUrl = (city) => {
         setOpen(!open)
+        let cityArr = selectedCities;
+
         cityArr.push(city.name)
+        
+        setSelectedCities(cityArr);
+
+        console.log("Citiesss",selectedCities)
 
         if(city.name != props.urlCity){
             props.history.push({
                 pathname: '/',
-                search: `?cities=${JSON.stringify(cityArr)}`
-       
+                search: `?cities=${cityArr}`       
             })
         }      
-        props.getCityFromUrl(city);
+        props.getCityFromUrl(city,selectedCities);
     
     }
     
