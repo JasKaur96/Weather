@@ -82,6 +82,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function WeatherCard(props) {
+
+    console.log("props WeatherCard", props)
    
     const classes = useStyles();
     const [weather,setWeather] = useState([])
@@ -105,7 +107,7 @@ export default function WeatherCard(props) {
     
     return (<div style={{display:"flex", justifyContent:"center", width:"100%",flexDirection:"row"}}>            
           <Card className={classes.root} >
-              <CardContent>
+               <CardContent>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
                   <strong> 
                   {props.cityDetails.name}

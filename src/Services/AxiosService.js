@@ -2,9 +2,9 @@ import axios from 'axios';
 
 export default class AxiosService{
     
-    getMethod = (url,isHeaderRequired = false) => {
+    getMethod = async (url,isHeaderRequired = false) => {
         console.log("Axios Service",url);
-        return axios.get(url,isHeaderRequired)
+        return await axios.get(url,isHeaderRequired)
     }
 
     // getMethod = (url)

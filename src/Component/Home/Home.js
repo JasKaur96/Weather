@@ -64,25 +64,19 @@ export default function Home() {
                 let details = res.data.list[0]
                 console.log("city heree",cities)
                 multipleCItyDetails.push(details)
-            
+                setCities(multipleCItyDetails)
             }).catch((error) => {
                 console.log(error);
             })    
-            setCities(multipleCItyDetails)
-        console.log("-----------------",cities)
     })
-   
-    console.log("multipleCItyDetails",)
            
 }
-
+console.log("cities are",cities)
     return (
         <div style={{background:"#85C1E9",height:"720px"}}>           
             <Search urlCities={urlCities} getCityFromUrl={getCityFromUrl}/>
-                {cities.map( (city) => 
-                 
+                {cities.map( (city) =>                  
                     <WeatherCard urlCities={urlCities} cityDetails={city} />
-              
                     )
                 }           
         </div>
