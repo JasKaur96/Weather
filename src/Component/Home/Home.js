@@ -1,84 +1,62 @@
-import React,{useState,useEffect} from 'react'
-import Search from '../Search/Search';
-import {useLocation} from "react-router-dom";
-import WeatherCard from '../WeatherCard/WeatherCard';
+import React, { useState, useEffect } from "react";
+import Search from "../Search/Search";
+import { useLocation } from "react-router-dom";
+import WeatherCard from "../WeatherCard/WeatherCard";
 // const classes = useStyles;
 
 import Service from "../../Services/CityService";
+import { Grid } from "@material-ui/core";
 
 const service = new Service();
 
-export default function Home() {  
-    let url = useLocation();
-    let citiesInUrl = [];
-    const [urlCities,setUrlCities] = useState(citiesInUrl);    
-    const [cities,setCities] = useState([]);
-    const [id,setCityId] = useState("");
+export default function Home() {
+  let url = useLocation();
+  let citiesInUrl = [];
+  const [urlCities, setUrlCities] = useState(citiesInUrl);
+  const [cities, setCities] = useState([]);
+  const [id, setCityId] = useState("");
 
-    useEffect(() => {
-        
-        let idCity = url.search;
-        let d = idCity.split("=",2)
+  useEffect(() => {
+    let idCity = url.search;
+    let d = idCity.split("=", 2);
 
-        console.log("url id", d[1])
-
-        if(d != ""){
-            citiesInUrl = d[1].split(",")
-            // console.log("cities",citiesInUrl)            
-            console.log("cities in if",citiesInUrl)
-            setUrlCities(citiesInUrl)           
-        }      
-        getCityFromUrl();
-         
-        // getWeather(urlCities);
-
-    }, []);
-     
-    useEffect(() => {
-        getCityFromUrl();
-    }, []);
-     
-    const getCityFromUrl = (name) =>{       
-
-        // if(name?.id){
-        //     setCityId(name.id)
-        //     console.log("citydetails", name,id)
-        //     setCities(name)
-        //     getWeather(id)
-        // }    
-
-        getWeather(name);
-
-
+    if (d != "") {
+      citiesInUrl = d[1].split(",");
+      setUrlCities(citiesInUrl);
     }
 
-// let details = cities
-    const getWeather = (cityArray=[]) => {
-    
-        console.log("City in get weather",cityArray)
-        setUrlCities(cityArray) 
-        let multipleCItyDetails = [];
-        cityArray.map((city) => {        
-            service.findCity(city).then((res) => {
-                
-                let details = res.data.list[0]
-                console.log("city heree",cities)
-                multipleCItyDetails.push(details)
-                setCities(multipleCItyDetails)
-            }).catch((error) => {
-                console.log(error);
-            })    
-    })
-           
-}
-console.log("cities are",cities)
-    return (
-        <div style={{background:"#85C1E9",height:"720px"}}>           
-            <Search urlCities={urlCities} getCityFromUrl={getCityFromUrl}/>
-                {cities.map( (city) =>                  
-                    <WeatherCard urlCities={urlCities} cityDetails={city} />
-                    )
-                }           
-        </div>
-    )
+    getWeather(citiesInUrl);
+  }, []);
+
+  const getWeather = async (cityArray = []) => {
+    console.log("City in get weather", cityArray);
+    setUrlCities(cityArray);
+    let multipleCItyDetails = [];
+
+    await Promise.all(
+      cityArray.map(async (city) => {
+        const res = await service.findCity(city);
+        let details = res.data.list[0];
+        multipleCItyDetails.push(details);
+      })
+    );
+    setCities([...multipleCItyDetails]);
+  };
+
+  return (
+    <div style={{ background: "#85C1E9", height: "720px" }}>
+      <Search urlCities={urlCities} getCityFromUrl={getWeather} />
+      {cities.map((city) => (
+        <Grid container spacing={3} style={{ marginLeft: "5%" }}>
+          <Grid item xs={6} sm={3}>
+            <WeatherCard
+              urlCities={urlCities}
+              cityDetails={city}
+              getCityFromUrl={getWeather}
+            />
+          </Grid>
+        </Grid>
+      ))}
+    </div>
+  );
 }
