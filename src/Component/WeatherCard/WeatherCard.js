@@ -13,16 +13,28 @@ const service = new Service();
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 375,
+    width: 330,
     marginLeft: 5,
     marginTop: 65,
     display: "flex",
     flexDirection: "row",
-  },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)",
+    // "@media (max-width: 780px)": {
+    [theme.breakpoints.up("xs")]: {
+      width: 335,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      marginTop: 65,
+      // marginLeft: "68%",
+    },
+    // [theme.breakpoints.up("sm")]: {
+    //   width: 455,
+    //   display: "flex",
+    //   flexDirection: "column",
+    //   justifyContent: "center",
+    //   marginTop: 65,
+    //   marginLeft: "-3%",
+    // },
   },
   title: {
     fontSize: 24,
@@ -31,12 +43,25 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
+    "@media (max-width: 360px)": {
+      fontSize: 35,
+    },
+    // [theme.breakpoints.up("sm")]: {
+    //   fontSize: 38,
+    // },
   },
   temp: {
     fontSize: 35,
     textAlign: "start",
     color: "black",
     marginTop: 15,
+    "@media (max-width: 360px)": {
+      fontSize: 40,
+      marginTop: 10,
+    },
+    // [theme.breakpoints.up("sm")]: {
+    //   fontSize: 38,
+    // },
   },
   wave: {
     height: 22,
@@ -47,6 +72,12 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 13,
     textAlign: "start",
     color: "black",
+    "@media (max-width: 360px)": {
+      fontSize: 20,
+    },
+    // [theme.breakpoints.up("sm")]: {
+    //   fontSize: 15,
+    // },
   },
   icon: {
     height: 12,
@@ -54,6 +85,9 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "start",
     fontSize: 13,
     marginTop: 5,
+    "@media (max-width: 360px)": {
+      fontSize: 20,
+    },
   },
   humid: {
     height: 12,
@@ -64,20 +98,54 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "row",
     // justifyContent: "space-between"
+    "@media (max-width: 360px)": {
+      fontSize: 20,
+      marginTop: 15,
+    },
   },
   icon2: {
+    position: "absolute",
     height: 12,
     paddingLeft: 30,
     textAlign: "start",
     fontSize: 13,
-    marginTop: 5,
+    marginTop: -8,
+    marginLeft: "-1%",
+    // [theme.breakpoints.up("md")]: {
+    //   marginLeft: "2%",
+    // },
+    [theme.breakpoints.up("xs")]: {
+      marginLeft: "-4%",
+    },
+    [theme.breakpoints.up("md")]: {
+      marginLeft: "-1%",
+    },
+    // [theme.breakpoints.up("sm")]: {
+    //   marginLeft: "-2%",
+    // },
   },
   close: {
     position: "absolute",
-    marginRight: 10,
-    // display:"flex",
-    // flexDirection:"row",
-    // justifyContent:"flex-end",
+    marginLeft: "18%",
+    [theme.breakpoints.up("xs")]: {
+      marginLeft: "73%",
+    },
+    [theme.breakpoints.up("md")]: {
+      marginLeft: "18%",
+    },
+    // [theme.breakpoints.up("sm")]: {
+    //   marginLeft: "52%",
+    // },
+  },
+  uv: {
+    fontSize: "10px",
+    marginLeft: "115px",
+    marginTop: "-12px",
+
+    "@media (max-width: 360px)": {
+      marginLeft: "155%",
+      marginTop: 5,
+    },
   },
 }));
 
@@ -102,38 +170,23 @@ function WeatherCard(props) {
   };
 
   const removeCard = (city) => {
-    console.log("Removed Card", city);
     let cityArr = cities;
-
-    // cityArr.pop(city.name);
 
     var cityIndex = cityArr.indexOf(city);
     cityArr.splice(cityIndex, 1);
 
-    // console.log("CityID", cityIndex, "araay", cityArr);
-
     setCities(cityArr);
 
-    // console.log("Citiesss removed", cities, cityArr);
-
-    // if (city.name != props.urlCity) {
     props.history.push({
       pathname: "/",
       search: `?cities=${cityArr}`,
     });
-    // }
+
     props.getCityFromUrl(cityArr);
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        width: "100%",
-        flexDirection: "row",
-      }}
-    >
+    <div>
       <Card className={classes.root}>
         <CardContent>
           <Typography
@@ -145,7 +198,6 @@ function WeatherCard(props) {
               {props.cityDetails.name},{props.cityDetails.sys.country}
             </strong>
             <CloseIcon
-              style={{ marginLeft: "20%" }}
               className={classes.close}
               onClick={() => removeCard(props.cityDetails.name)}
             />
@@ -164,7 +216,17 @@ function WeatherCard(props) {
           <Typography variant="body2" component="p"></Typography>
           <div className={classes.icon}>
             <NearMeIcon className={classes.icon} />
-            5.1m/s W <CheckCircleOutlineIcon className={classes.icon2} />
+            5.1m/s W{" "}
+          </div>
+
+          <CheckCircleOutlineIcon className={classes.icon2} />
+          <div
+            style={{
+              fontSize: "13px",
+              marginLeft: "100px",
+              marginTop: "-12px",
+            }}
+          >
             108hPa
           </div>
           <div className={classes.humid}>
@@ -172,8 +234,19 @@ function WeatherCard(props) {
               Humidity:{" "}
               {weather && weather.current ? weather.current.humidity : " "}%{" "}
             </div>
-            <div style={{ marginLeft: "30px" }}> UV:9</div>
           </div>
+          <div
+            classesName={classes.uv}
+            style={{
+              fontSize: "13px",
+              marginLeft: "65px",
+              marginTop: "-12px",
+            }}
+          >
+            {" "}
+            UV:9
+          </div>
+
           <div className={classes.humid}>
             <div>
               {" "}
@@ -182,11 +255,16 @@ function WeatherCard(props) {
                 ? weather.current.dew_point
                 : ""}C{" "}
             </div>
-            <div style={{ marginLeft: "23px" }}>
-              {" "}
-              Visibility:{" "}
-              {weather && weather.current ? weather.current.visibility : ""}km
-            </div>
+          </div>
+          <div
+            style={{
+              fontSize: "13px",
+              marginLeft: "135px",
+              marginTop: "-12px",
+            }}
+          >
+            Visibility:
+            {weather && weather.current ? weather.current.visibility : ""}km
           </div>
         </CardContent>
       </Card>

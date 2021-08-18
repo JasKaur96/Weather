@@ -2,14 +2,38 @@ import React, { useState, useEffect } from "react";
 import Search from "../Search/Search";
 import { useLocation } from "react-router-dom";
 import WeatherCard from "../WeatherCard/WeatherCard";
-// const classes = useStyles;
-
+import "./Home.css";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Service from "../../Services/CityService";
 import { Grid } from "@material-ui/core";
 
 const service = new Service();
 
+const useStyles = makeStyles((theme) => ({
+  home: {
+    display: "flex",
+    justifyContent: "center",
+    [theme.breakpoints.up("md")]: {
+      height: "100vh !important",
+    },
+  },
+  grid: {
+    width: "93%",
+    /* height: 100%; */
+    marginLeft: "3%",
+    display: "flex",
+    justifyContent: "center",
+    marginBottom: " 20%",
+    [theme.breakpoints.up("md")]: {
+      // width: "100% !important",
+      width: "120% !important",
+      // height: "156vh !important",
+    },
+  },
+}));
+
 export default function Home() {
+  const classes = useStyles();
   let url = useLocation();
   let citiesInUrl = [];
   const [urlCities, setUrlCities] = useState(citiesInUrl);
@@ -44,19 +68,26 @@ export default function Home() {
   };
 
   return (
-    <div style={{ background: "#85C1E9", height: "720px" }}>
+    <div
+      style={{
+        background: "#85C1E9",
+      }}
+      className="home"
+    >
       <Search urlCities={urlCities} getCityFromUrl={getWeather} />
-      {cities.map((city) => (
-        <Grid container spacing={3} style={{ marginLeft: "5%" }}>
-          <Grid item xs={6} sm={3}>
-            <WeatherCard
-              urlCities={urlCities}
-              cityDetails={city}
-              getCityFromUrl={getWeather}
-            />
-          </Grid>
+      <div className="grid">
+        <Grid container spacing={3} justifyContent={"center"}>
+          {cities.map((city) => (
+            <Grid item xs={12} md={3} sm={12}>
+              <WeatherCard
+                urlCities={urlCities}
+                cityDetails={city}
+                getCityFromUrl={getWeather}
+              />
+            </Grid>
+          ))}
         </Grid>
-      ))}
+      </div>
     </div>
   );
 }
