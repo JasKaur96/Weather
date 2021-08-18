@@ -25,12 +25,12 @@ const useStyles = makeStyles((theme) => ({
   text: {
     position: "relative",
     marginTop: 75,
-    marginLeft: 90,
+    marginLeft: "10%",
     borderRadius: 4,
     backgroundColor: theme.palette.background.paper,
     fontSize: 16,
-    width: 610,
-    // height: 40,
+    width: "100%",
+    height: "38%",
     "&:focus": {
       borderRadius: 4,
       borderColor: "#80bdff",
@@ -41,42 +41,40 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "-1%",
     },
     [theme.breakpoints.up("md")]: {
-      width: 610,
-      marginLeft: "-1%",
+      width: "10%",
+      marginLeft: "1%",
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   width: 610,
-    //   fontSize: 30,
-    //   marginLeft: "-15%",
-    //   // height: 60,
-    //   // marginTop: "7.8%",
-    // },
+    [theme.breakpoints.up("sm")]: {
+      width: "60%",
+      marginLeft: "1%",
+      height: "70%",
+    },
   },
   search: {
     marginTop: 75,
-    marginLeft: 2,
-    // height: "10px",
-    // fontSize: "15px",
+    marginLeft: "2%",
+    height: "10%",
+    fontSize: "20px",
     // "@media (max-width: 420px)": {
     [theme.breakpoints.up("xs")]: {
-      height: "40px",
+      height: "50%",
       fontSize: "18px",
       marginLeft: "10px",
       marginTop: "30px",
     },
     // "@media (max-width: 780px)": {
     [theme.breakpoints.up("md")]: {
-      height: "53px",
-      fontSize: "15px",
+      // height: "63%",
+      fontSize: "23px",
       marginLeft: "25px",
       marginTop: "75px",
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   // width: "100%",
-    //   height: "53px",
-    //   marginLeft: "75%",
-    //   marginTop: "-8%",
-    // },
+    [theme.breakpoints.up("sm")]: {
+      // height: "40%",
+      fontSize: "23px",
+      marginLeft: "25px",
+      marginTop: "75px",
+    },
   },
   popper: {
     position: "relative",
@@ -94,11 +92,11 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "29%",
       marginTop: "7.8%",
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   width: "56%",
-    //   marginLeft: "6%",
-    //   marginTop: "10.8%",
-    // },
+    [theme.breakpoints.up("sm")]: {
+      width: "47.6%",
+      marginLeft: "10.5%",
+      marginTop: "10.2%",
+    },
   },
   paper: {
     padding: 4,
@@ -112,11 +110,11 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "18px",
       flexDirection: "column",
     },
-    [theme.breakpoints.up("md")]: {
-      width: "39%",
-      marginLeft: "-3.3%",
-      marginTop: "0.8%",
-    },
+    // [theme.breakpoints.up("md")]: {
+    //   width: "39%",
+    //   marginLeft: "-3.3%",
+    //   marginTop: "0.8%",
+    // },
   },
   list: {
     minWidth: "100%",
@@ -134,9 +132,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("xs")]: {
       fontSize: "10px",
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   fontSize: "20px",
-    // },
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "18px",
+    },
   },
   loader: {
     zIndex: theme.zIndex.drawer + 1,
@@ -152,17 +150,17 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("xs")]: {
       fontSize: "15px",
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   fontSize: "25px",
-    // },
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "22px",
+    },
   },
   name: {
     [theme.breakpoints.up("xs")]: {
       fontSize: "15px",
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   fontSize: "25px",
-    // },
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "23px",
+    },
   },
   icon: {
     display: "flex",

@@ -14,7 +14,7 @@ const service = new Service();
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 330,
-    marginLeft: 5,
+    marginLeft: "5%",
     marginTop: 65,
     display: "flex",
     flexDirection: "row",
@@ -27,14 +27,14 @@ const useStyles = makeStyles((theme) => ({
       marginTop: 65,
       // marginLeft: "68%",
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   width: 455,
-    //   display: "flex",
-    //   flexDirection: "column",
-    //   justifyContent: "center",
-    //   marginTop: 65,
-    //   marginLeft: "-3%",
-    // },
+    [theme.breakpoints.up("sm")]: {
+      width: 505,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      marginTop: 65,
+      marginLeft: "-5%",
+    },
   },
   title: {
     fontSize: 24,
@@ -46,9 +46,9 @@ const useStyles = makeStyles((theme) => ({
     "@media (max-width: 360px)": {
       fontSize: 35,
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   fontSize: 38,
-    // },
+    [theme.breakpoints.up("sm")]: {
+      fontSize: 38,
+    },
   },
   temp: {
     fontSize: 35,
@@ -59,9 +59,9 @@ const useStyles = makeStyles((theme) => ({
       fontSize: 40,
       marginTop: 10,
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   fontSize: 38,
-    // },
+    [theme.breakpoints.up("sm")]: {
+      fontSize: 38,
+    },
   },
   wave: {
     height: 22,
@@ -75,9 +75,9 @@ const useStyles = makeStyles((theme) => ({
     "@media (max-width: 360px)": {
       fontSize: 20,
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   fontSize: 15,
-    // },
+    [theme.breakpoints.up("sm")]: {
+      fontSize: 18,
+    },
   },
   icon: {
     height: 12,
@@ -111,18 +111,16 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 13,
     marginTop: -8,
     marginLeft: "-1%",
-    // [theme.breakpoints.up("md")]: {
-    //   marginLeft: "2%",
-    // },
+
     [theme.breakpoints.up("xs")]: {
       marginLeft: "-4%",
     },
     [theme.breakpoints.up("md")]: {
       marginLeft: "-1%",
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   marginLeft: "-2%",
-    // },
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: "-2%",
+    },
   },
   close: {
     position: "absolute",
@@ -133,9 +131,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {
       marginLeft: "18%",
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   marginLeft: "52%",
-    // },
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: "57%",
+    },
   },
   uv: {
     fontSize: "10px",
