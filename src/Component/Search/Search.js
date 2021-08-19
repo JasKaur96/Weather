@@ -7,12 +7,10 @@ import {
   Paper,
   Popper,
   TextField,
-  useMediaQuery,
 } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import CloudIcon from "@material-ui/icons/Cloud";
-import InputBase from "@material-ui/core/InputBase";
 import { withRouter } from "react-router-dom";
 import Service from "../../Services/CityService";
 import "./Search.css";
@@ -44,39 +42,23 @@ const useStyles = makeStyles((theme) => ({
       width: 610,
       marginLeft: "-1%",
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   width: 610,
-    //   fontSize: 30,
-    //   marginLeft: "-15%",
-    //   // height: 60,
-    //   // marginTop: "7.8%",
-    // },
   },
   search: {
     marginTop: 75,
     marginLeft: 2,
-    // height: "10px",
-    // fontSize: "15px",
-    // "@media (max-width: 420px)": {
+
     [theme.breakpoints.up("xs")]: {
       height: "40px",
       fontSize: "18px",
       marginLeft: "10px",
       marginTop: "30px",
     },
-    // "@media (max-width: 780px)": {
     [theme.breakpoints.up("md")]: {
       height: "53px",
       fontSize: "15px",
       marginLeft: "25px",
       marginTop: "75px",
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   // width: "100%",
-    //   height: "53px",
-    //   marginLeft: "75%",
-    //   marginTop: "-8%",
-    // },
   },
   popper: {
     position: "relative",
@@ -88,17 +70,11 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "7.8%",
       marginTop: "35%",
     },
-    // "@media (max-width: 780px)": {
     [theme.breakpoints.up("md")]: {
       width: "100%",
       marginLeft: "29%",
       marginTop: "7.8%",
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   width: "56%",
-    //   marginLeft: "6%",
-    //   marginTop: "10.8%",
-    // },
   },
   paper: {
     padding: 4,
@@ -106,7 +82,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     flexDirection: "column",
-    // "@media (max-width: 420px)": {
     [theme.breakpoints.up("xs")]: {
       display: "flex",
       fontSize: "18px",
@@ -126,7 +101,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   listItemText: {
-    // marginLeft:3,
     fontSize: "12px",
     display: "flex",
     justifyContent: "flex-end",
@@ -134,9 +108,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("xs")]: {
       fontSize: "10px",
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   fontSize: "20px",
-    // },
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "15px",
+    },
   },
   loader: {
     zIndex: theme.zIndex.drawer + 1,
@@ -152,17 +126,11 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("xs")]: {
       fontSize: "15px",
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   fontSize: "25px",
-    // },
   },
   name: {
     [theme.breakpoints.up("xs")]: {
       fontSize: "15px",
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   fontSize: "25px",
-    // },
   },
   icon: {
     display: "flex",
@@ -182,15 +150,12 @@ function Search(props) {
   const [cityDetails, setCityDetails] = useState([]);
   const [selectedCities, setSelectedCities] = useState(props.urlCities);
   const [loader, setLoader] = useState(false);
-  useEffect(() => {
-    console.log("Cities form url", props.urlCities, selectedCities);
-  }, [selectedCities]);
+  useEffect(() => {}, [selectedCities]);
 
   const setSearchCity = (city) => {
     if (city === "") {
       setOpen(false);
     }
-    console.log("city from search", city);
     setCity(city);
   };
 
@@ -232,13 +197,9 @@ function Search(props) {
       if (length === 4) {
         cityArr.shift();
       }
-      console.log("Empty CITY NOT in url", length);
       cityArr.push(city.name);
 
       setSelectedCities(cityArr);
-
-      console.log("Citiesss", selectedCities);
-
       props.history.push({
         pathname: "/",
         search: `?cities=${cityArr}`,

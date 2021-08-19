@@ -18,23 +18,14 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 65,
     display: "flex",
     flexDirection: "row",
-    // "@media (max-width: 780px)": {
     [theme.breakpoints.up("xs")]: {
       width: 335,
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
       marginTop: 65,
-      // marginLeft: "68%",
+      marginLeft: "0%",
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   width: 455,
-    //   display: "flex",
-    //   flexDirection: "column",
-    //   justifyContent: "center",
-    //   marginTop: 65,
-    //   marginLeft: "-3%",
-    // },
   },
   title: {
     fontSize: 24,
@@ -46,9 +37,6 @@ const useStyles = makeStyles((theme) => ({
     "@media (max-width: 360px)": {
       fontSize: 35,
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   fontSize: 38,
-    // },
   },
   temp: {
     fontSize: 35,
@@ -59,9 +47,6 @@ const useStyles = makeStyles((theme) => ({
       fontSize: 40,
       marginTop: 10,
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   fontSize: 38,
-    // },
   },
   wave: {
     height: 22,
@@ -75,13 +60,9 @@ const useStyles = makeStyles((theme) => ({
     "@media (max-width: 360px)": {
       fontSize: 20,
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   fontSize: 15,
-    // },
   },
   icon: {
     height: 12,
-    // paddingRight: 5,
     textAlign: "start",
     fontSize: 13,
     marginTop: 5,
@@ -97,7 +78,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 5,
     display: "flex",
     flexDirection: "row",
-    // justifyContent: "space-between"
     "@media (max-width: 360px)": {
       fontSize: 20,
       marginTop: 15,
@@ -120,9 +100,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {
       marginLeft: "-1%",
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   marginLeft: "-2%",
-    // },
   },
   close: {
     position: "absolute",
@@ -133,9 +110,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {
       marginLeft: "18%",
     },
-    // [theme.breakpoints.up("sm")]: {
-    //   marginLeft: "52%",
-    // },
   },
   uv: {
     fontSize: "10px",
@@ -160,8 +134,6 @@ function WeatherCard(props) {
   }, [cities]);
 
   const getWeatherDetails = () => {
-    console.log("Weather card city", props.cityDetails);
-
     service
       .getCity(props.cityDetails.coord.lat, props.cityDetails.coord.lon)
       .then((details) => {
@@ -171,10 +143,8 @@ function WeatherCard(props) {
 
   const removeCard = (city) => {
     let cityArr = cities;
-
     var cityIndex = cityArr.indexOf(city);
     cityArr.splice(cityIndex, 1);
-
     setCities(cityArr);
 
     props.history.push({

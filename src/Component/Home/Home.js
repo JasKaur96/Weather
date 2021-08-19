@@ -3,7 +3,7 @@ import Search from "../Search/Search";
 import { useLocation } from "react-router-dom";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import "./Home.css";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Service from "../../Services/CityService";
 import { Grid } from "@material-ui/core";
 
@@ -19,15 +19,12 @@ const useStyles = makeStyles((theme) => ({
   },
   grid: {
     width: "93%",
-    /* height: 100%; */
     marginLeft: "3%",
     display: "flex",
     justifyContent: "center",
     marginBottom: " 20%",
     [theme.breakpoints.up("md")]: {
-      // width: "100% !important",
       width: "120% !important",
-      // height: "156vh !important",
     },
   },
 }));
@@ -38,22 +35,19 @@ export default function Home() {
   let citiesInUrl = [];
   const [urlCities, setUrlCities] = useState(citiesInUrl);
   const [cities, setCities] = useState([]);
-  const [id, setCityId] = useState("");
 
   useEffect(() => {
     let idCity = url.search;
-    let d = idCity.split("=", 2);
+    let separateByComma = idCity.split("=", 2);
 
-    if (d != "") {
-      citiesInUrl = d[1].split(",");
+    if (separateByComma != "") {
+      citiesInUrl = separateByComma[1].split(",");
       setUrlCities(citiesInUrl);
     }
-
     getWeather(citiesInUrl);
   }, []);
 
   const getWeather = async (cityArray = []) => {
-    console.log("City in get weather", cityArray);
     setUrlCities(cityArray);
     let multipleCItyDetails = [];
 
