@@ -4,15 +4,15 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const axios = new AxiosService();
-let cnt = 7;
+let cnt = 7; 
 
-const baseurl = "https://api.openweathermap.org/data/2.5";
+const baseurl = "https://api.openweathermap.org/data/2.5/";
 const weatherKey = process.env.REACT_APP_WEATHER_KEY;
 
 export default class CityService {
-  getCityDetails = (id) => {
+  getSevenDaysDetails = (cityID) => {
     return axios.getMethod(
-      `${baseurl}forecast/daily?id=${id}&appid=${weatherKey}`
+     `https://api.openweathermap.org/data/2.5/forecast/daily?id=${cityID}&cnt=7&appid=${weatherKey}`
     );
   };
 

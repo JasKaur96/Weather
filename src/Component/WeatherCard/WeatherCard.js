@@ -13,7 +13,7 @@ const service = new Service();
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 330,
+    width: "50%",
     marginLeft: 5,
     marginTop: 65,
     display: "flex",
@@ -25,6 +25,11 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "center",
       marginTop: 65,
       marginLeft: "0%",
+    },
+    [theme.breakpoints.up("md")]: {
+      width: "100%",
+      marginLeft: "2%",
+      marginTop: "25.4%",
     },
   },
   title: {
@@ -91,9 +96,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 13,
     marginTop: -8,
     marginLeft: "-1%",
-    // [theme.breakpoints.up("md")]: {
-    //   marginLeft: "2%",
-    // },
+  
     [theme.breakpoints.up("xs")]: {
       marginLeft: "-4%",
     },
@@ -138,6 +141,7 @@ function WeatherCard(props) {
       .getCity(props.cityDetails.coord.lat, props.cityDetails.coord.lon)
       .then((details) => {
         setWeather(details.data);
+        props.setDailyTemp(details.data)
       });
   };
 
@@ -194,7 +198,7 @@ function WeatherCard(props) {
             style={{
               fontSize: "13px",
               marginLeft: "100px",
-              marginTop: "-12px",
+              marginTop: "-9px",
             }}
           >
             108hPa
@@ -229,7 +233,7 @@ function WeatherCard(props) {
           <div
             style={{
               fontSize: "13px",
-              marginLeft: "135px",
+              marginLeft: "145px",
               marginTop: "-12px",
             }}
           >
@@ -238,6 +242,7 @@ function WeatherCard(props) {
           </div>
         </CardContent>
       </Card>
+
     </div>
   );
 }

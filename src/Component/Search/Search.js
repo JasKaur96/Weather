@@ -88,9 +88,9 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: "column",
     },
     [theme.breakpoints.up("md")]: {
-      width: "39%",
-      marginLeft: "-3.3%",
-      marginTop: "0.8%",
+      width: "46.3%",
+      marginLeft: "-7.7%",
+      marginTop: "2.4%",
     },
   },
   list: {
